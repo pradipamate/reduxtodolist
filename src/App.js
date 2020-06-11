@@ -7,7 +7,7 @@ import { addTodoAction } from './action/todoaction';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
-function App() {
+const App =()=> {
   const [todo, setTodo] = useState("");
   const dispatch = useDispatch();
   const addTodo = ((todo) => dispatch(addTodoAction(todo)));
@@ -24,20 +24,19 @@ function App() {
     setTodo("")
   }
 
-  const todos = useSelector((state) => state.todos);
-  //Dispatch Data
+  // way to fecth data
+  const todos = useSelector((state) => state.Todos);
+  console.log("todo", todos);
+   //Dispatch Data
   const deleteTodo = (todoId) => dispatch(deleteTodoAction(todoId));
-  console.log("todos list", todos);
-  if (todos.length !== "" && todos !== undefined) {
-    var TodoList = todos.map(todo => (
+  var TodoList;
+  if (todos !== undefined) {
+    TodoList = todos.map(todo => (
       <li key={todo.id}>
         <span>{todo.name}</span>
         <span className="delete-button" onClick={deleteTodo.bind(null, todo.id)}>x</span>
       </li>
     ))
-  }
-  else{
-
   }
 
   return (
